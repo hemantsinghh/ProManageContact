@@ -3,6 +3,17 @@
     <title> Home Page</title>
 </head>
 <body>
-<h1 th:text = "'Welcome' + ${name}">Welcome!</h1>
+<link rel ="stylesheet" data-th-href="@{'/css/output.css'}"/>
+<div class="container text-2xl">
+    <h1 th:text = "'Welcome! ' + ${name}">Welcome!</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce elementum justo non eros fermentum, id tincidunt sapien tempus. Curabitur laoreet nisi ut mauris condimentum, sit amet cursus justo feugiat. 
+        Integer tristique magna nec odio faucibus, at convallis dolor varius. Nullam non urna ut est consequat aliquet. 
+        Sed nec nisl velit. Nam vulputate dapibus orci, sed scelerisque nunc tristique ac. Aenean sit amet aliquam dolor. 
+        Mauris scelerisque, eros et efficitur tincidunt, nulla libero tincidunt est, et faucibus sapien ligula sit amet est. 
+        Phasellus eget semper sapien. Duis sed nisi a tortor bibendum elementum. Ut eget pharetra sapien. Phasellus ut leo libero. 
+        Sed fringilla est non sapien pharetra tincidunt.</p>
+
+</div>        
+
 </body>
 </html>
