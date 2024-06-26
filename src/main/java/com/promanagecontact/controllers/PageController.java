@@ -11,4 +11,13 @@ public class PageController {
         model.addAttribute("name","Hemant Singh");
         return "home";
     }
+    @RequestMapping("/about")
+    public String about() {
+        return "about";
+    }
+    @RequestMapping("/services")
+    public String services(){
+        return "services";
+    }
+    
 }

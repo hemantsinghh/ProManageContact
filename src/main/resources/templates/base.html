@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="parent(content,title,link)" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:replace="${title}"></title>
+</head>
+<body>
+
+    <a th:href="@{'/home'}">home</a>
+    <a th:href="@{'/services'}">services</a>
+    <a th:href="@{'/about'}">about</a>
+    <section th:replace="${link}"></section>
+    <section th:replace="${content}"></section>
+    <p1>@all rights are reserved 2024</p1>
+</body>
+</html>

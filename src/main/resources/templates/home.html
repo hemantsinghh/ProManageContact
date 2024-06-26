@@ -1,10 +1,10 @@
-<html>
+<html th:replace="~{base::parent(~{::#content},~{::title},~{::link})}">
 <head>
     <title>Home Page</title>
     <link rel="stylesheet" data-th-href="@{'/css/output.css'}"/>
 </head>
 <body>
-<div class="relative flex bg-gray-400 min-h-screen items-center justify-center">    
+<div id = content class="relative flex bg-gray-400 min-h-screen items-center justify-center">
 
     <div class="relative text-1xl flex-col">
         <div class="relative bg-white px-6 pb-8 pt-10 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10 justify-items-center">
