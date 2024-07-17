@@ -1,24 +1,13 @@
-<html th:replace="~{base::parent(~{::#content},~{::title},~{::link})}">
+<!DOCTYPE html>
+<html th:replace = "~{base::parent(~{::#content},~{::title},~{})}" lang="en" >
 <head>
-    <title>Home Page</title>
-    <link rel="stylesheet" data-th-href="@{'/css/output.css'}"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
 </head>
 <body>
-<div id = content class="relative flex bg-gray-400 min-h-screen items-center justify-center">
-
-    <div class="relative text-1xl flex-col">
-        <div class="relative bg-white px-6 pb-8 pt-10 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10 justify-items-center">
-            <h1 th:text="'Welcome! ' + ${name}">Welcome!</h1>
-        </br>
-            <p class="text-gray-500 text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce elementum justo non eros fermentum, id tincidunt sapien tempus. Curabitur laoreet nisi ut mauris condimentum, sit amet cursus justo feugiat. 
-                Integer tristique magna nec odio faucibus, at convallis dolor varius. Nullam non urna ut est consequat aliquet. 
-                Sed nec nisl velit. Nam vulputate dapibus orci, sed scelerisque nunc tristique ac. Aenean sit amet aliquam dolor. 
-            </p>
-            <div class="flex justify-center mt-4">
-                <button class="bg-blue-400 hover:bg-blue-200 text-white py-3 px-5 rounded">click me</button>
-            </div>
-        </div>
-    </div>        
-</div>
+    <div id = "content">
+        <p>This is home page</p>
+    </div>
 </body>
 </html>

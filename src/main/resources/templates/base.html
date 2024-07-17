@@ -1,18 +1,20 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="parent(content,title,link)" lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:replace="${title}"></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.4.7/flowbite.min.css"/>
+    <link rel="stylesheet" data-th-href="@{'/css/output.css'}"/>
 </head>
 <body>
+    <div th:replace="~{navbar::navbar}"></div>
+    <br><br><br>
+    <div class = "mt-5">
+        <section th:replace="${content}" ></section>
+    </div>
 
-    <a th:href="@{'/home'}">home</a>
-    <a th:href="@{'/services'}">services</a>
-    <a th:href="@{'/about'}">about</a>
-    <section th:replace="${link}"></section>
-    <section th:replace="${content}"></section>
-    <p>@all rights are reserved 2024</p>
+<!--    <p>@all rights are reserved 2024</p>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.4.7/flowbite.min.js"></script>
 </body>
 </html>
