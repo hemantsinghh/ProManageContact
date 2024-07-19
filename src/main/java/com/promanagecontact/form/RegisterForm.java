@@ -14,4 +14,5 @@ public class RegisterForm {
     private String email;
     private String password;
     private String about;
+    private String phoneNumber;
 }

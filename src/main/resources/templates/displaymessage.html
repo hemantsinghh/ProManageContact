@@ -1,0 +1,9 @@
+<div th:if = "${session.message}"
+     th:object = "${session.message}"
+     th:fragment = "msg">
+  <div th:classappend = "*{'text-'+messageType+'-800 rounded-lg bg-'+messageType+'-100'}"
+       class="p-4 mb-4 text-sm" role="alert">
+    <span class="font-medium">Success alert!</span> <span th:text = "*{message}"></span>
+    <th:block th:text = "${@removeMessage.removeMessage()}"></th:block>
+</div>
+</div>

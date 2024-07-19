@@ -2,8 +2,10 @@ package com.promanagecontact.controllers;
 
 import com.promanagecontact.entities.User;
 import com.promanagecontact.form.RegisterForm;
+import com.promanagecontact.helper.DisplayMessage;
+import com.promanagecontact.helper.Message;
 import com.promanagecontact.services.Implementaion.UserServiceImpl;
-import com.promanagecontact.services.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,20 +39,21 @@ public class PageController {
     @GetMapping("/register")
     public String signUp(Model model) {
         RegisterForm registerForm =  new RegisterForm();
-        registerForm.setName("Hemant");
         model.addAttribute("registerForm", registerForm);
         return "register";
     }
 
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
-    public String registerSubmit(@ModelAttribute RegisterForm registerForm){
-        User user = User.builder()
-                        .name(registerForm.getName())
-                                .about(registerForm.getAbout())
-                                        .email(registerForm.getEmail())
-                                                .password(registerForm.getPassword())
-                                                        .build();
+    public String registerSubmit(@ModelAttribute RegisterForm registerForm, HttpSession httpSession){
+        User user =  new User();
+        user.setName(registerForm.getName());
+        user.setAbout(registerForm.getAbout());
+        user.setEmail(registerForm.getEmail());
+        user.setPassword(registerForm.getPassword());
+        user.setPhoneNumber(registerForm.getPhoneNumber());
         userService.saveUser(user);
+        Message message = new Message("Registration Successful",DisplayMessage.green);
+        httpSession.setAttribute("message",message);
         return "redirect:/register";
     }
     @RequestMapping("/contact")
