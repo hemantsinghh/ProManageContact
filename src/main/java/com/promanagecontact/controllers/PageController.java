@@ -34,7 +34,7 @@ public class PageController {
     }
     @RequestMapping("/login")
     public String login() {
-        return new String("login");
+        return "login";
     }
     @GetMapping("/register")
     public String signUp(Model model) {
@@ -58,7 +58,7 @@ public class PageController {
     }
     @RequestMapping("/contact")
     public String contact() {
-        return new String("contact");
+        return "contact";
     }
     
     
