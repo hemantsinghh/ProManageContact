@@ -7,6 +7,7 @@ import com.promanagecontact.services.UserService;
 import org.apache.logging.log4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +20,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 //    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
     @Override
     public User saveUser(User user) {
         String userId  = UUID.randomUUID().toString();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoleList(List.of("NORMAL_USER"));
         user.setUserId(userId);
         return userRepo.save(user);
     }

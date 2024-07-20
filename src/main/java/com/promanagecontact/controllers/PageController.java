@@ -6,13 +6,19 @@ import com.promanagecontact.helper.DisplayMessage;
 import com.promanagecontact.helper.Message;
 import com.promanagecontact.services.Implementaion.UserServiceImpl;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -44,13 +50,14 @@ public class PageController {
     }
 
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
-    public String registerSubmit(@ModelAttribute RegisterForm registerForm, HttpSession httpSession){
+    public String registerSubmit(@Valid @ModelAttribute RegisterForm registerForm, BindingResult br, HttpSession httpSession){
         User user =  new User();
+        if(br.hasErrors()) return "register";
         user.setName(registerForm.getName());
         user.setAbout(registerForm.getAbout());
         user.setEmail(registerForm.getEmail());
-        user.setPassword(registerForm.getPassword());
         user.setPhoneNumber(registerForm.getPhoneNumber());
+        user.setPassword(registerForm.getPassword());
         userService.saveUser(user);
         Message message = new Message("Registration Successful",DisplayMessage.green);
         httpSession.setAttribute("message",message);
