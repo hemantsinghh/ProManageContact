@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +18,6 @@ public class SecurityConfig {
     @Autowired
     private CustomUserDetailService customUserDetailService;
 
-
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider =  new DaoAuthenticationProvider();
@@ -27,6 +25,7 @@ public class SecurityConfig {
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
        httpSecurity.authorizeHttpRequests(req->{
@@ -35,7 +34,9 @@ public class SecurityConfig {
         });
 
        //TODO: configure later
-       httpSecurity.formLogin(Customizer.withDefaults());
+       httpSecurity.formLogin(form -> {
+           form.loginPage("/login");
+       });
        return httpSecurity.build();
     }
 

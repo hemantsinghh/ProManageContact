@@ -1,6 +1,7 @@
 package com.promanagecontact.controllers;
 
 import com.promanagecontact.entities.User;
+import com.promanagecontact.form.LoginForm;
 import com.promanagecontact.form.RegisterForm;
 import com.promanagecontact.helper.DisplayMessage;
 import com.promanagecontact.helper.Message;
@@ -11,11 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -34,10 +31,6 @@ public class PageController {
     @RequestMapping("/services")
     public String services(){
         return "services";
-    }
-    @RequestMapping("/login")
-    public String login() {
-        return "login";
     }
     @GetMapping("/register")
     public String signUp(Model model) {
@@ -60,10 +53,28 @@ public class PageController {
         httpSession.setAttribute("message",message);
         return "redirect:/register";
     }
+
+    @RequestMapping("/login")
+    public String login(Model model) {
+        LoginForm loginForm = new LoginForm();
+        model.addAttribute("loginForm", loginForm);
+        return "login";
+    }
+
+    @PostMapping(value = "/authenticate")
+    public String processLogin(@ModelAttribute LoginForm loginForm){
+        String email =  loginForm.getEmail();
+        String password =  loginForm.getPassword();
+        if(email!=null && userService.userExistByEmail(email) && password!=null){
+            Boolean bool = userService.IfPasswordMatches(email, loginForm.getPassword());
+            if (bool) return "redirect:/user/dashboard";
+        }
+        return "redirect:/login";
+    }
+
     @RequestMapping("/contact")
     public String contact() {
         return "contact";
     }
-    
-    
+
 }

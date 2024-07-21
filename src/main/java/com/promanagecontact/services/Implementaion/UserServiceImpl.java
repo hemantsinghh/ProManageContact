@@ -5,6 +5,7 @@ import com.promanagecontact.form.ResourceNotFoundException;
 import com.promanagecontact.repositories.UserRepo;
 import com.promanagecontact.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -68,6 +69,11 @@ public class UserServiceImpl implements UserService {
         return user!=null;
     }
 
+
+    public Boolean IfPasswordMatches(String email, String enteredPassword){
+            String password = userRepo.findPasswordByEmail(email);
+            return passwordEncoder.matches(enteredPassword, password);
+    }
     public List<User> getAllUser(){
         return userRepo.findAll();
     }
